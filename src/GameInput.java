@@ -5,34 +5,46 @@ public class GameInput {
 
 
     //get input for the size of the  random item times 2
-    private static boolean isGetInput;
-    private static String randomItem= Main.randomItem;
+//    private static boolean isGetInput;
+//    private static String randomItem= Main.randomItem;
 //    private String convertedString = Utils.convertedString;
 //    String convertedItem = Utils.convertItemToUnderscore(randomItem);
 
-    public static void getInput() {
-
+    public static String getInput() {
         Scanner input = new Scanner(System.in);
-        isGetInput = true;
-        int numberOfTries = (randomItem.length()) *2;
         String letter = null;
-        while (isGetInput) {
+        letter = input.next();
+        return letter;
+    }
 
-            System.out.println("Guess a letter: ");
-            letter = input.next();
+//    public static void getOtherInputs(){
+//
+//    String letter = getInput();
+//
+//        }
 
-            String result = Utils.compareInputAndRandItem(letter);
+
+    }
+//  }
+//
+
+//        while (isGetInput) {
+//
+//            System.out.println("Guess a letter: ");
+
+
+
 //            if (result != null)
-            System.out.println(result);
+//            System.out.println(result);
 
 
 
 //                System.out.println(letter);
-            numberOfTries--;
-            if (numberOfTries == 0)
-                isGetInput = false;
+//            numberOfTries--;
+//            if (numberOfTries == 0)
+//                isGetInput = false;
 
-            }
+
             //compare letter to the movie
 //            boolean result = randomItem.contains(letter);
 //            if (result){
@@ -42,15 +54,15 @@ public class GameInput {
 
 
 //            System.out.println(letter);
-        System.out.println("GAME OVER");
-        System.out.printf("%nThe title of the movie is %s", randomItem);
+//        System.out.println("GAME OVER");
+//        System.out.printf("%nThe title of the movie is %s", randomItem);
 
 
 
-    }
+//    }
 
 
-    }
+//    }
 
 //    public static void setRandomItem(String randomItem) {
 //        GameInput.randomItem = randomItem;

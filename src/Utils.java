@@ -52,27 +52,30 @@ public class Utils {
 
 
     //THIS FUNCTION GETS THE STRING FROM THE USER AND COMPARE IT WITH THE RANDOMITEM
-    private static int wrong_letter_count = 0;
+    protected static int wrong_letter_count = 0;
+    protected static int right_letter_count = 0;
 
-    public static String compareInputAndRandItem(String letter){
-        String convertedString = Main.convertedItem;
-        String randomItem = Main.randomItem;
-        String convertedRandomItem = convertedString;
+    public static String compareInputAndRandItem(String letter,String underscorizedItem, String randomItem){
+
+
+
 
 
         boolean letterIsPresent = randomItem.contains(letter);
 //        String convertedString = convertItemToUnderscore(randomItem);
         if (letterIsPresent){
+            right_letter_count +=1;
             //convert the string to character
             char letter_c = letter.charAt(0);
             //get the index of the letter in the string
             int index = randomItem.indexOf(letter);
             //replace the char in the converted string with the new character
-            convertedRandomItem = convertedString.replace(convertedString.charAt(index),letter_c);
-            return convertedRandomItem;
+            return underscorizedItem.replace(underscorizedItem.charAt(index),letter_c) + "\n" +
+                    "You have guessed (" + right_letter_count + ") correct letters";
+
         }else{
             wrong_letter_count += 1;
-            return convertedRandomItem + "\n" + "You have guessed (" + wrong_letter_count + ") wrong letters";
+            return underscorizedItem + "\n" + "You have guessed (" + wrong_letter_count + ") wrong letters";
 
         }
 
