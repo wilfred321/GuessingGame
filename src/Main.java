@@ -5,6 +5,8 @@ public class Main {
     static String randomItem;
     static String convertedItem;
 
+    static String gameStatus;
+
     protected static boolean isGameOn = true;
     static int numberOfTries;
 //    static Utils utility = new Utils();
@@ -60,16 +62,24 @@ public class Main {
 
             if (numberOfTries == 0){
                 isGameOn = false;
+                gameStatus = "GAME OVER!\nSorry you lost.";
+
             }
             else{
                 String result = Utils.compareInputAndRandItem(letter, convertedItem, randomItem);
-                System.out.println(result);
+                if (Utils.isGuessComplete(result,randomItem)) {
+                    gameStatus = "Congratulations. You Won!";
+                   isGameOn = false;
+                }
+                else {
+                    System.out.println(result);
+                }
                 //proceed to get another input
             }
 
         }
         //The game is over
-        System.out.println("GAME OVER");
+        System.out.println(gameStatus);
         System.out.println();
         System.out.println("Game Stats");
         System.out.println("______________");

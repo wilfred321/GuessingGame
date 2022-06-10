@@ -12,8 +12,9 @@ public class Utils {
     static String convertedLetter;
     public static String [] gameItems = new String[100];
 //    static String convertedString = convertItemToUnderscore(Main.randomItem);
-    static String newUnderscorizedItem = Main.convertedItem;
+    static String newUnderscorizedItem;
 
+    private static String newResult = null;
 
 
     public static ArrayList<String> gameItemsList = new ArrayList<>();
@@ -57,10 +58,16 @@ public class Utils {
 
     //FUNCTION TO CONVERT ONE LETTER FROM UNDERSCORE TO LETTER
     protected static String convertItemFromUnderscore(String underscoredItem, int index,char letter){
-       convertedString = new StringBuffer(underscoredItem);
-       convertedString.setCharAt(index,letter);
-       return convertedString.toString();
 
+        if (newResult == null)
+            newResult = underscoredItem;
+        else
+            newResult = newUnderscorizedItem;
+
+       convertedString = new StringBuffer(newResult);
+       convertedString.setCharAt(index,letter);
+       newUnderscorizedItem = newResult.replaceAll("\\S+", convertedString.toString());
+       return newUnderscorizedItem;
     }
 
     //THIS FUNCTION GETS THE STRING FROM THE USER AND COMPARE IT WITH THE RANDOMITEM
@@ -81,8 +88,10 @@ public class Utils {
 
             //replace the char in the converted string with the new character
 //            String newUnderscorizedItem = underscorizedItem.replace(underscorizedItem.charAt(index),letter_c);
-            newUnderscorizedItem = convertItemFromUnderscore(convertedLetter,index,letter_c);
+            newUnderscorizedItem = convertItemFromUnderscore(underscorizedItem,index,letter_c);
             String message = "\n" + "You have guessed (" + right_letter_count + ") correct letters";
+            if (newUnderscorizedItem.equals(randomItem))
+                return newUnderscorizedItem;
             return newUnderscorizedItem + message;
         }else{
             wrong_letter_count += 1;
@@ -92,14 +101,16 @@ public class Utils {
                 return newUnderscorizedItem + "\n" + "You have guessed (" + wrong_letter_count + ") wrong letters";
             }
 
-
-
         }
 
-
-
-
     }
+//check if guess is complete.
+    public static boolean isGuessComplete(String userGuesses,String randomItem) {
+        return userGuesses.compareTo(randomItem) == 0;
+    }
+
+
+
 
 }
 
