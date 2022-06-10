@@ -8,6 +8,8 @@ public class Utils {
     private static final String FILENAME = "movies.txt";
     //define an initialize array to store the movies
 //    public static String convertedString;
+   static StringBuffer convertedString;
+    static String convertedLetter;
     public static String [] gameItems = new String[100];
 //    static String convertedString = convertItemToUnderscore(Main.randomItem);
     static String newUnderscorizedItem = Main.convertedItem;
@@ -48,18 +50,17 @@ public class Utils {
 
         //FUNCTION TO CONVERT ALL LETTERS TO UNDERSCORE
     protected static String convertItemToUnderscore(String item){
-       String convertedLetter;
+//       String convertedLetter;
        convertedLetter = item.replaceAll("\\w","_");
        return convertedLetter;
     }
 
     //FUNCTION TO CONVERT ONE LETTER FROM UNDERSCORE TO LETTER
     protected static String convertItemFromUnderscore(String underscoredItem, int index,char letter){
-        int i = index;
-        String result;
+       convertedString = new StringBuffer(underscoredItem);
+       convertedString.setCharAt(index,letter);
+       return convertedString.toString();
 
-        do {result = underscoredItem.replace(underscoredItem.charAt(index),letter);} while (i == index);
-        return result;
     }
 
     //THIS FUNCTION GETS THE STRING FROM THE USER AND COMPARE IT WITH THE RANDOMITEM
@@ -80,7 +81,7 @@ public class Utils {
 
             //replace the char in the converted string with the new character
 //            String newUnderscorizedItem = underscorizedItem.replace(underscorizedItem.charAt(index),letter_c);
-            newUnderscorizedItem = convertItemFromUnderscore(underscorizedItem,index,letter_c);
+            newUnderscorizedItem = convertItemFromUnderscore(convertedLetter,index,letter_c);
             String message = "\n" + "You have guessed (" + right_letter_count + ") correct letters";
             return newUnderscorizedItem + message;
         }else{
