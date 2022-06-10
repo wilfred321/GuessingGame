@@ -9,6 +9,9 @@ public class Utils {
     //define an initialize array to store the movies
 //    public static String convertedString;
     public static String [] gameItems = new String[100];
+//    static String convertedString = convertItemToUnderscore(Main.randomItem);
+    static String newUnderscorizedItem = Main.convertedItem;
+
 
 
     public static ArrayList<String> gameItemsList = new ArrayList<>();
@@ -45,11 +48,19 @@ public class Utils {
 
         //FUNCTION TO CONVERT ALL LETTERS TO UNDERSCORE
     protected static String convertItemToUnderscore(String item){
-       String convertedString;
-       convertedString = item.replaceAll("\\w","_");
-       return convertedString;
+       String convertedLetter;
+       convertedLetter = item.replaceAll("\\w","_");
+       return convertedLetter;
     }
 
+    //FUNCTION TO CONVERT ONE LETTER FROM UNDERSCORE TO LETTER
+    protected static String convertItemFromUnderscore(String underscoredItem, int index,char letter){
+        int i = index;
+        String result;
+
+        do {result = underscoredItem.replace(underscoredItem.charAt(index),letter);} while (i == index);
+        return result;
+    }
 
     //THIS FUNCTION GETS THE STRING FROM THE USER AND COMPARE IT WITH THE RANDOMITEM
     protected static int wrong_letter_count = 0;
@@ -57,12 +68,8 @@ public class Utils {
 
     public static String compareInputAndRandItem(String letter,String underscorizedItem, String randomItem){
 
-
-
-
-
         boolean letterIsPresent = randomItem.contains(letter);
-//        String convertedString = convertItemToUnderscore(randomItem);
+
         if (letterIsPresent){
             right_letter_count +=1;
             //convert the string to character
@@ -72,13 +79,19 @@ public class Utils {
             //get oldest variable
 
             //replace the char in the converted string with the new character
-            String newUnderscorizedItem = underscorizedItem.replace(underscorizedItem.charAt(index),letter_c);
-
+//            String newUnderscorizedItem = underscorizedItem.replace(underscorizedItem.charAt(index),letter_c);
+            newUnderscorizedItem = convertItemFromUnderscore(underscorizedItem,index,letter_c);
             String message = "\n" + "You have guessed (" + right_letter_count + ") correct letters";
             return newUnderscorizedItem + message;
         }else{
             wrong_letter_count += 1;
-            return underscorizedItem + "\n" + "You have guessed (" + wrong_letter_count + ") wrong letters";
+            if (newUnderscorizedItem == null)
+                return "\n" + "You have guessed (" + wrong_letter_count + ") wrong letters";
+            else{
+                return newUnderscorizedItem + "\n" + "You have guessed (" + wrong_letter_count + ") wrong letters";
+            }
+
+
 
         }
 

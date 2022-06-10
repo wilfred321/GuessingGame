@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static int itemSize;
-    private static String randomItem;
-    private static String convertedItem;
+    static String randomItem;
+    static String convertedItem;
 
     protected static boolean isGameOn = true;
     static int numberOfTries;
