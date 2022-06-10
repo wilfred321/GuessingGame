@@ -3,16 +3,18 @@ import java.util.ArrayList;
 public class Main {
     public static int itemSize;
     private static String randomItem;
-    protected static String convertedItem;
+    private static String convertedItem;
+
     protected static boolean isGameOn = true;
     static int numberOfTries;
-
+//    static Utils utility = new Utils();
 
 
     //print game instructions
     public static void printGameInstructions() {
         System.out.println("You are guessing: " + convertedItem);
-        System.out.print("Enter a guess: ");
+        System.out.println("You have " + numberOfTries + " guesses");
+        System.out.print("Enter your first guess: ");
 
     }
 
@@ -42,14 +44,14 @@ public class Main {
         convertedItem = Utils.convertItemToUnderscore(randomItem);
 //        System.out .println("Guess the letters to form the movie title below");
 //        System.out.printf("%s%n%n",convertedItem);
-
+        numberOfTries = (randomItem.length()) *2;
         printGameInstructions();
         //*************Get input from user and return a letter**************
-        numberOfTries = (randomItem.length()) *2;
+
         while (isGameOn) {
             //print enter anothe guess on subsequent guesses not the first guess
             if (numberOfTries != (randomItem.length()) *2)
-                System.out.println("Enter another guess: ");
+                System.out.println("\n\n(" + numberOfTries + ") guesses remaining\nEnter another guess: ");
 
             String letter = GameInput.getInput();
             numberOfTries --;

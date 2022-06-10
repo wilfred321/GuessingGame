@@ -44,7 +44,7 @@ public class Utils {
     }
 
         //FUNCTION TO CONVERT ALL LETTERS TO UNDERSCORE
-    public static String convertItemToUnderscore(String item){
+    protected static String convertItemToUnderscore(String item){
        String convertedString;
        convertedString = item.replaceAll("\\w","_");
        return convertedString;
@@ -69,10 +69,13 @@ public class Utils {
             char letter_c = letter.charAt(0);
             //get the index of the letter in the string
             int index = randomItem.indexOf(letter);
-            //replace the char in the converted string with the new character
-            return underscorizedItem.replace(underscorizedItem.charAt(index),letter_c) + "\n" +
-                    "You have guessed (" + right_letter_count + ") correct letters";
+            //get oldest variable
 
+            //replace the char in the converted string with the new character
+            String newUnderscorizedItem = underscorizedItem.replace(underscorizedItem.charAt(index),letter_c);
+
+            String message = "\n" + "You have guessed (" + right_letter_count + ") correct letters";
+            return newUnderscorizedItem + message;
         }else{
             wrong_letter_count += 1;
             return underscorizedItem + "\n" + "You have guessed (" + wrong_letter_count + ") wrong letters";
